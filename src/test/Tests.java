@@ -6,24 +6,30 @@ import org.testng.annotations.BeforeTest;
 
 import java.util.concurrent.TimeUnit;
 
-public class Tests {
+public class Tests{
     ChromeDriver driver;
     AutoHomePage homePageObject;
     AutoLoginPage loginPageObject;
 
-    @BeforeTest
-    public void setup()
+    //@BeforeTest
+    //public void setup()
+    //{
+    //    System.setProperty("webdriver.chrome.driver", "C:/Users/1/Downloads/chromedriver.exe");
+    //    driver = new ChromeDriver();
+    //    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    //    driver.manage().window().maximize();
+    //    driver.get("https://beru.ru/");
+    //}
+
+    @Test
+    public void FirstTest()
     {
         System.setProperty("webdriver.chrome.driver", "C:/Users/1/Downloads/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get("https://beru.ru/");
-    }
 
-    @Test
-    public void FirstTest()
-    {
         homePageObject = new AutoHomePage(driver);
         loginPageObject = new AutoLoginPage(driver);
 
