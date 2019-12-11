@@ -1,3 +1,5 @@
+import PageObject.HomePage;
+import PageObject.LoginPage;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -6,8 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Tests{
     ChromeDriver driver;
-    AutoHomePage homePageObject;
-    AutoLoginPage loginPageObject;
+    HomePage homePageObject;
+    LoginPage loginPageObject;
 
     @Before
     public void setup()
@@ -21,14 +23,23 @@ public class Tests{
     @Test
     public void FirstTest()
     {
-        homePageObject = new AutoHomePage(driver);
-        loginPageObject = new AutoLoginPage(driver);
+        homePageObject = new HomePage(driver);
+        loginPageObject = new LoginPage(driver);
 
         Assert.assertEquals("Войти в аккаунт", homePageObject.getTextLoginToAccount());
         homePageObject.clickLoginToAccount();
         loginPageObject.Authorization("alexanderustalkov", "Witcher71");
         Assert.assertEquals("Мой профиль", homePageObject.getTextMyProfile());
         Assert.assertEquals("Александр Усталков", homePageObject.getTextLogin());
+    }
+
+    @Test
+    public void SecondTest()
+    {
+        homePageObject = new HomePage(driver);
+
+        homePageObject.changeCity("Хвалынск");
+        Assert.assertEquals("Хвалынск", homePageObject.getTextCity());
     }
     @After
     public void endOfTest()

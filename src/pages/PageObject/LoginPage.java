@@ -1,3 +1,5 @@
+package PageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -5,16 +7,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class AutoLoginPage {
+public class LoginPage {
     private WebDriver driver;
-    @FindBy
     private By userLogin = By.cssSelector("input#passp-field-login");
-    @FindBy
     private By userPassword = By.cssSelector("input#passp-field-passwd");
-    @FindBy
     private By buttonAuthorization = By.cssSelector("button[class = \"control button2 button2_view_classic button2_size_l button2_theme_action button2_width_max button2_type_submit passp-form-button\"]");
 
-    public AutoLoginPage(WebDriver driver)
+    public LoginPage(WebDriver driver)
     {
         this.driver = driver;
     }
