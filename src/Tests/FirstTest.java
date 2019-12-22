@@ -1,20 +1,20 @@
-import PageObject.HomePage;
-import PageObject.LoginPage;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.testng.Assert;
 
-public class Tests{
+public class FirstTest{
     ChromeDriver driver;
     HomePage homePageObject;
     LoginPage loginPageObject;
+    String login = "alexanderustalkov";
+    String password = "Witcher71";
 
-    @Before
+    @BeforeMethod
     public void setup()
     {
-    System.setProperty("webdriver.chrome.driver", "C:/Users/1/Downloads/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:/Users/1/Downloads/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://beru.ru/");
@@ -25,23 +25,14 @@ public class Tests{
     {
         homePageObject = new HomePage(driver);
         loginPageObject = new LoginPage(driver);
-
         Assert.assertEquals("Войти в аккаунт", homePageObject.getTextLoginToAccount());
+
         homePageObject.clickLoginToAccount();
-        loginPageObject.Authorization("alexanderustalkov", "Witcher71");
+        loginPageObject.Authorization(login, password);
         Assert.assertEquals("Мой профиль", homePageObject.getTextMyProfile());
         Assert.assertEquals("Александр Усталков", homePageObject.getTextLogin());
     }
-
-    @Test
-    public void SecondTest()
-    {
-        homePageObject = new HomePage(driver);
-
-        homePageObject.changeCity("Хвалынск");
-        Assert.assertEquals("Хвалынск", homePageObject.getTextCity());
-    }
-    @After
+    @AfterMethod
     public void endOfTest()
     {
         driver.close();
