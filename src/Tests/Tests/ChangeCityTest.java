@@ -1,8 +1,10 @@
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.*;
+package Tests;
 
-public class SecondTest {
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
+import PageObject.*;
+
+public class ChangeCityTest {
     ChromeDriver driver;
     HomePage homePageObject;
     LoginPage loginPageObject;
@@ -17,20 +19,24 @@ public class SecondTest {
         driver.manage().window().maximize();
         driver.get("https://beru.ru/");
     }
-    @Test
-    public void SecondTest()
+    @DataProvider
+    public Object[] Cities() {
+        return new String[]{"Хвалынск", "Москва", "Рязань"};
+    }
+    @Test(dataProvider = "Cities")
+    public void SecondTest(String city)
     {
         homePageObject = new HomePage(driver);
         loginPageObject = new LoginPage(driver);
         settingsPageObject = new SettingsPage(driver);
 
-        homePageObject.changeCity("Хвалынск");
-        Assert.assertEquals("Хвалынск", homePageObject.getTextCity("Хвалынск"));
+        homePageObject.changeCity(city);
+        homePageObject.checkTextCity(city);
 
         homePageObject.clickLoginToAccount();
         loginPageObject.Authorization(login, password);
         homePageObject.clickSettings();
-        Assert.assertEquals("Хвалынск", settingsPageObject.getCityInSettings());
+        settingsPageObject.checkCityInSettings(city);
     }
     @AfterMethod
     public void endOfTest()

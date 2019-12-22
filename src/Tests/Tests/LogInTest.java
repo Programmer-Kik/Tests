@@ -1,10 +1,12 @@
+package Tests;
+
+import PageObject.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.Assert;
 
-public class FirstTest{
+public class LogInTest {
     ChromeDriver driver;
     HomePage homePageObject;
     LoginPage loginPageObject;
@@ -12,8 +14,7 @@ public class FirstTest{
     String password = "Witcher71";
 
     @BeforeMethod
-    public void setup()
-    {
+    public void setup() {
         System.setProperty("webdriver.chrome.driver", "C:/Users/1/Downloads/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -21,16 +22,17 @@ public class FirstTest{
     }
 
     @Test
-    public void FirstTest()
-    {
+    public void FirstTest() {
         homePageObject = new HomePage(driver);
         loginPageObject = new LoginPage(driver);
-        Assert.assertEquals("Войти в аккаунт", homePageObject.getTextLoginToAccount());
+
+        homePageObject.checkTextLoginToAccount("Войти в аккаунт");
 
         homePageObject.clickLoginToAccount();
         loginPageObject.Authorization(login, password);
-        Assert.assertEquals("Мой профиль", homePageObject.getTextMyProfile());
-        Assert.assertEquals("Александр Усталков", homePageObject.getTextLogin());
+        homePageObject.checkTextMyProfile("Мой профиль");
+
+        homePageObject.checkTextLogin("Александр Усталков");
     }
     @AfterMethod
     public void endOfTest()
