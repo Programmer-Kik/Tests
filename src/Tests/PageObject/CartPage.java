@@ -57,5 +57,6 @@ public class CartPage {
         if(buttonAddToothbrush.isEnabled()) {
             buttonAddToothbrush.click();
         }
+        wait.until(ExpectedConditions.elementToBeClickable(buttonGoToOrderRegistration));
     }
 }

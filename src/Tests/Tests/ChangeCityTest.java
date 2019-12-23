@@ -1,25 +1,15 @@
 package Tests;
 
-import org.openqa.selenium.chrome.ChromeDriver;
+import Settings.WebDriverSettings;
 import org.testng.annotations.*;
 import PageObject.*;
 
-public class ChangeCityTest {
-    ChromeDriver driver;
+public class ChangeCityTest extends WebDriverSettings {
     HomePage homePageObject;
     LoginPage loginPageObject;
     SettingsPage settingsPageObject;
     String login = "alexanderustalkov";
     String password = "Witcher71";
-
-    @BeforeMethod
-    public void setup()
-    {
-        System.setProperty("webdriver.chrome.driver", "C:/Users/1/Downloads/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://beru.ru/");
-    }
 
     @DataProvider
     public Object[] Cities() {
@@ -40,11 +30,5 @@ public class ChangeCityTest {
         loginPageObject.Authorization(login, password);
         homePageObject.clickSettings();
         settingsPageObject.checkCityInSettings(city);
-    }
-
-    @AfterMethod
-    public void endOfTest()
-    {
-        driver.close();
     }
 }

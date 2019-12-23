@@ -1,13 +1,10 @@
 package Tests;
 
 import PageObject.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import Settings.WebDriverSettings;
 import org.testng.annotations.Test;
 
-public class BuyToothbrushesTest {
-    ChromeDriver driver;
+public class BuyToothbrushesTest extends WebDriverSettings {
     HomePage homePageObject;
     LoginPage loginPageObject;
     CataloguePage cataloguePageObject;
@@ -18,15 +15,6 @@ public class BuyToothbrushesTest {
     String minPrice = "999";
     String maxPrice = "1999";
     String priceFreeShipping = "2499";
-
-    @BeforeMethod
-    public void setup()
-    {
-        System.setProperty("webdriver.chrome.driver", "C:/Users/1/Downloads/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://beru.ru/");
-    }
 
     @Test
     public void buyToothbrushesTest() {
@@ -57,11 +45,5 @@ public class BuyToothbrushesTest {
         cartPageObject.goToOrderRegistration();
         orderRegistrationPageObject.changeTypeOfShipping();
         orderRegistrationPageObject.checkCorrectPrice();
-    }
-
-    @AfterMethod
-    public void endOfTest()
-    {
-        driver.close();
     }
 }
