@@ -11,6 +11,7 @@ public class ChangeCityTest {
     SettingsPage settingsPageObject;
     String login = "alexanderustalkov";
     String password = "Witcher71";
+
     @BeforeMethod
     public void setup()
     {
@@ -19,12 +20,14 @@ public class ChangeCityTest {
         driver.manage().window().maximize();
         driver.get("https://beru.ru/");
     }
+
     @DataProvider
     public Object[] Cities() {
         return new String[]{"Хвалынск", "Москва", "Рязань"};
     }
+
     @Test(dataProvider = "Cities")
-    public void SecondTest(String city)
+    public void changeCityTest(String city)
     {
         homePageObject = new HomePage(driver);
         loginPageObject = new LoginPage(driver);
@@ -38,6 +41,7 @@ public class ChangeCityTest {
         homePageObject.clickSettings();
         settingsPageObject.checkCityInSettings(city);
     }
+
     @AfterMethod
     public void endOfTest()
     {

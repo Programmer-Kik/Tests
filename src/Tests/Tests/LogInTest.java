@@ -22,7 +22,7 @@ public class LogInTest {
     }
 
     @Test
-    public void FirstTest() {
+    public void logInTest() {
         homePageObject = new HomePage(driver);
         loginPageObject = new LoginPage(driver);
 

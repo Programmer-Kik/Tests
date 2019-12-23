@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.Keys;
@@ -20,6 +19,8 @@ public class HomePage {
     private By cityInList = By.cssSelector("li[id = \"react-autowhatever-region--item-0\"]");
     private By confirmationButton = By.cssSelector("button[class = \"_4qhIn2-ESi Pjv3h3YbYr THqSbzx07u\"]");
     private By settings = By.cssSelector("a[href=\"/my/settings?track=menu\"]");
+    private By inputSearch = By.cssSelector("input[type = \"search\"]");
+    private By buttonSearch = By.cssSelector("button[type = \"submit\"]");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -103,5 +104,17 @@ public class HomePage {
         wait.until(ExpectedConditions.elementToBeClickable(settings));
         WebElement buttonSettings = driver.findElement(settings);
         buttonSettings.click();
+    }
+
+    @Step(value = "Переход в каталог электрических зубных щеток")
+    public void goToCatalogueOfToothbrushes() {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(inputSearch));
+        WebElement inputSearch = driver.findElement(this.inputSearch);
+        inputSearch.click();
+        inputSearch.sendKeys("Электрические зубные щетки");
+        wait.until(ExpectedConditions.elementToBeClickable(buttonSearch));
+        WebElement firstElement = driver.findElement(buttonSearch);
+        firstElement.click();
     }
 }
